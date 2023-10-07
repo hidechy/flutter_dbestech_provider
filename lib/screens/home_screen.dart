@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_dbestech_provider_onlineshop/screens/pages/product_by_cat.dart';
 
 import '../controllers/home_screen_provider.dart';
 import 'components/bottom_nav_bar.dart';
-import 'pages/add_page.dart';
+
 import 'pages/cart_page.dart';
 import 'pages/home_page.dart';
 import 'pages/person_page.dart';
@@ -17,7 +18,7 @@ class HomeScreen extends StatelessWidget {
   List<Widget> pageList = [
     const HomePage(),
     const SearchPage(),
-    const AddPage(),
+    const ProductByCat(),
     const CartPage(),
     const PersonPage(),
   ];
