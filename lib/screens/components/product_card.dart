@@ -70,7 +70,7 @@ class _ProductCardState extends State<ProductCard> {
                 children: [
                   Text(
                     widget.name,
-                    style: const TextStyle(fontSize: 36, color: Colors.black, fontWeight: FontWeight.bold, height: 1.1),
+                    style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold, height: 1.1),
                   ),
                   Text(
                     widget.category,

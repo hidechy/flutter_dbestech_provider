@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 import '../../extensions/extensions.dart';
+import '../../models/sneaker.dart';
+import '../../services/helper.dart';
 import '../components/product_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,6 +16,37 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late final TabController _tabController = TabController(length: 3, vsync: this);
+
+  late Future<List<Sneaker>> _male;
+
+  // late Future<List<Sneaker>> _female;
+  // late Future<List<Sneaker>> _kids;
+  //
+  //
+
+  ///
+  void getMale() {
+    _male = Helper().getMaleSneakers();
+  }
+
+  ///
+  void getFemale() {
+    _male = Helper().getFemaleSneakers();
+  }
+
+  ///
+  void getKids() {
+    _male = Helper().getKidsSneakers();
+  }
+
+  ///
+  @override
+  void initState() {
+    super.initState();
+    getMale();
+    getFemale();
+    getKids();
+  }
 
   ///
   @override
@@ -73,21 +106,35 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     children: [
                       SizedBox(
                         height: context.screenSize.height * 0.4,
-                        child: ListView.builder(
-                          itemCount: 6,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return const Padding(
-                              padding: EdgeInsets.all(8),
-                              child: ProductCard(
-                                price: '200',
-                                category: 'aaa',
-                                id: 'bbb',
-                                name: 'ccc',
-                                image:
-                                    'https://d326fntlu7tb1e.cloudfront.net/uploads/710d020f-2da8-4e9e-8cff-0c8f24581488-GV6674.webp',
-                              ),
-                            );
+                        child: FutureBuilder<List<Sneaker>>(
+                          future: _male,
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return const CircularProgressIndicator();
+                            } else if (snapshot.hasError) {
+                              return const Text('Error');
+                            } else {
+                              final male = snapshot.data;
+
+                              return ListView.builder(
+                                itemCount: male!.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  final shoe = male[index];
+
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: ProductCard(
+                                      price: shoe.price,
+                                      category: shoe.name,
+                                      id: shoe.id,
+                                      name: shoe.name,
+                                      image: shoe.imageUrl[0],
+                                    ),
+                                  );
+                                },
+                              );
+                            }
                           },
                         ),
                       ),
