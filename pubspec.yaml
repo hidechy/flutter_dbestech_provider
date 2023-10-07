@@ -1,0 +1,41 @@
+name: test_dbestech_provider_onlineshop
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.6 <4.0.0'
+
+dependencies:
+
+  cached_network_image:
+  cupertino_icons: ^1.0.2
+
+  flutter:
+    sdk: flutter
+
+  flutter_rating_bar:
+  flutter_screenutil:
+  flutter_staggered_grid_view:
+  flutter_vector_icons:
+  google_fonts:
+  hive:
+  hive_flutter:
+  provider:
+
+dev_dependencies:
+
+  flutter_lints: ^2.0.0
+
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/json/
