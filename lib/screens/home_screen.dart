@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
       return Scaffold(
         backgroundColor: const Color(0xffe2e2e2),
         body: pageList[homeScreenController.pageIndex],
-        bottomNavigationBar: BottomNavBar(),
+        bottomNavigationBar: const BottomNavBar(),
       );
     });
   }
