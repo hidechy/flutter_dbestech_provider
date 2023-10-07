@@ -1,6 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 import '../../extensions/extensions.dart';
+import '../components/product_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -58,15 +61,91 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: context.screenSize.height * 0.25),
+              padding: EdgeInsets.only(
+                top: context.screenSize.height * 0.25,
+                left: 12,
+                right: 12,
+              ),
               child: TabBarView(
                 controller: _tabController,
                 children: [
                   Column(
                     children: [
-                      Container(
+                      SizedBox(
                         height: context.screenSize.height * 0.4,
-                        decoration: const BoxDecoration(color: Colors.blueAccent),
+                        child: ListView.builder(
+                          itemCount: 6,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return const Padding(
+                              padding: EdgeInsets.all(8),
+                              child: ProductCard(
+                                price: '200',
+                                category: 'aaa',
+                                id: 'bbb',
+                                name: 'ccc',
+                                image:
+                                    'https://d326fntlu7tb1e.cloudfront.net/uploads/710d020f-2da8-4e9e-8cff-0c8f24581488-GV6674.webp',
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      const Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 12),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Latest Shoes',
+                                  style: TextStyle(fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold),
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Show All',
+                                      style: TextStyle(fontSize: 22, color: Colors.black, fontWeight: FontWeight.w500),
+                                    ),
+                                    Icon(
+                                      AntDesign.caretright,
+                                      size: 20,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: context.screenSize.height * 0.15,
+                        child: ListView.builder(
+                          itemCount: 6,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black38, spreadRadius: 1, blurRadius: 0.8, offset: Offset(0, 1)),
+                                  ],
+                                ),
+                                height: context.screenSize.height * 0.15,
+                                width: context.screenSize.width * 0.3,
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      'https://d326fntlu7tb1e.cloudfront.net/uploads/710d020f-2da8-4e9e-8cff-0c8f24581488-GV6674.webp',
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
